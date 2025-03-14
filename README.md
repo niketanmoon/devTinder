@@ -38,6 +38,11 @@ app.get("/user", (req, res, next)=> {
   })
 
 ## Database, Schema and Models | Mongoose
+
 - Create a config folder
 - add file database.js
 - install mongoose to connect to the db
+- Add model schema and add user to database
+
+## Diving into the apis
+- 

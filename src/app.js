@@ -6,18 +6,13 @@ import { User } from "./models/user.js";
 
 const app = express();
 
+// middleware to converting body to json
+app.use(express.json());
+
 app.post("/signup", async (req, res) => {
-  const userObj = {
-    firstName: "Niketan",
-    lastName: "Moon",
-    emailId: "niketanmoon@gmail.com",
-    password: "Test@123",
-    age: 31,
-    gender: "Male",
-  };
   try {
     // Creating new instance of user model
-    const user = new User(userObj);
+    const user = new User(req.body);
 
     await user.save();
     res.send("User added successfully");
