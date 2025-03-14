@@ -13,3 +13,6 @@
 - create apis using app.use
 - Add nodemon to watch the changes
 - update scripts inside package.json
+
+## Routes
+- Added get and post test calls

@@ -1,8 +1,12 @@
 import express from "express";
 const app = express();
 
-app.use((req, res) => {
-  res.send("Hello from the server!");
+app.get("/user", () => {
+  res.send({ firstName: "Niketan", lastName: "Moon" });
+});
+
+app.use("/test", (req, res) => {
+  res.send("Testing from the server");
 });
 
 app.listen(7777, () => {
