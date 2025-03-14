@@ -64,3 +64,10 @@ app.get("/user", (req, res, next)=> {
 - Add timestamps
 - install package `validator`
 - Added validator functions for email, password and photoUrl
+
+
+## Encrypting Passwords and adding extra validations
+- Added validations using helper function
+- install bcrypt
+- Create password hash using bcrypt hash
+- API: /login 

@@ -1,8 +1,10 @@
 import express from "express";
-import { adminAuth, userAuth } from "./middlewares/auth.js";
 import "dotenv/config";
 import { connectDB } from "./config/database.js";
 import { User } from "./models/user.js";
+import { validateSignupData } from "./utils/validation.js";
+import bcrypt from "bcrypt";
+import validator from "validator";
 
 const app = express();
 
@@ -11,13 +13,47 @@ app.use(express.json());
 
 app.post("/signup", async (req, res) => {
   try {
-    // Creating new instance of user model
-    const user = new User(req.body);
+    // Validation of data
+    validateSignupData(req);
 
+    const { firstName, lastName, emailId, password } = req.body;
+    // Encrypt the password
+    const passwordHash = await bcrypt.hash(password, 10);
+
+    // Creating new instance of user model
+    const user = new User({
+      firstName,
+      lastName,
+      emailId,
+      password: passwordHash,
+    });
     await user.save();
     res.send("User added successfully");
   } catch (err) {
     res.status(400).send("Error saving user: " + err.message);
+  }
+});
+
+app.post("/login", async (req, res) => {
+  try {
+    const { emailId, password } = req.body;
+    if (!validator.isEmail(emailId)) {
+      throw new Error("Not a valid email");
+    }
+
+    const user = await User.findOne({ emailId: emailId });
+    if (!user) {
+      throw new Error("Email or password is not correct");
+    }
+    const isPasswordValid = await bcrypt.compare(password, user.password);
+
+    if (isPasswordValid) {
+      res.send("Login Successful!!!");
+    } else {
+      throw new Error("Email or password is not correct");
+    }
+  } catch (err) {
+    res.status(400).send("ERROR: " + err.message);
   }
 });
 
