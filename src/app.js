@@ -52,7 +52,7 @@ app.get("/feed", async (req, res) => {
 
 // PATCH: /user => Updates the user by id
 app.patch("/user/:userId", async (req, res) => {
-  const userId = req.params.userId;
+  const userId = req.params?.userId;
   const data = req.body;
   try {
     const ALLOWED_UPDATES = ["photoUrl", "about", "gender", "age", "skills"];
