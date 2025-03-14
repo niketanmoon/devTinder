@@ -45,4 +45,9 @@ app.get("/user", (req, res, next)=> {
 - Add model schema and add user to database
 
 ## Diving into the apis
-- 
+
+- added signup route and added dynamic data to signup and save to db
+- Added middleware to parse the body in json
+- Getting the feed
+- Get user by email api
+- Get all the users with /feed api
