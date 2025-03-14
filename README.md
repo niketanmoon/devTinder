@@ -51,3 +51,6 @@ app.get("/user", (req, res, next)=> {
 - Getting the feed
 - Get user by email api
 - Get all the users with /feed api
+
+- API: Delete a user by id
+- API: Update a user by id
