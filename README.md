@@ -30,4 +30,9 @@ app.get("/user", (req, res, next)=> {
 
 ```
 
--
+- Write auth middlewares 2 approaches
+- Error handling should be done using try catch
+- If you want to do it using middleware then remember that the first parameter is err and you define 4 parameters
+- app.use("/", (err, req, res, next) => {
+  res.send("Hello There")
+  })
