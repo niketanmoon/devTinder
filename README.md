@@ -36,3 +36,8 @@ app.get("/user", (req, res, next)=> {
 - app.use("/", (err, req, res, next) => {
   res.send("Hello There")
   })
+
+## Database, Schema and Models | Mongoose
+- Create a config folder
+- add file database.js
+- install mongoose to connect to the db

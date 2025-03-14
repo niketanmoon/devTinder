@@ -1,22 +1,38 @@
 import express from "express";
 import { adminAuth, userAuth } from "./middlewares/auth.js";
+import "dotenv/config";
+import { connectDB } from "./config/database.js";
+import { User } from "./models/user.js";
+
 const app = express();
 
-app.use("/admin", adminAuth);
+app.post("/signup", async (req, res) => {
+  const userObj = {
+    firstName: "Niketan",
+    lastName: "Moon",
+    emailId: "niketanmoon@gmail.com",
+    password: "Test@123",
+    age: 31,
+    gender: "Male",
+  };
+  try {
+    // Creating new instance of user model
+    const user = new User(userObj);
 
-app.get("/admin/getAllData", (req, res) => {
-  res.send("Admin data fetched");
-});
-
-app.get("/user", userAuth, (req, res) => {
-  res.send("User data fetched");
-});
-
-app.use("/", (err, req, res, next) => {
-  if (err) {
-    res.status(500).send("An unexpected error occured");
+    await user.save();
+    res.send("User added successfully");
+  } catch (err) {
+    res.status(400).send("Error saving user: " + err.message);
   }
 });
-app.listen(7777, () => {
-  console.log("Server is successfully listening on port 7777");
-});
+
+connectDB()
+  .then(() => {
+    console.log("Database connected successfull");
+    app.listen(7777, () => {
+      console.log("Server is successfully listening on port 7777");
+    });
+  })
+  .catch(() => {
+    console.error("Database is not connected");
+  });
