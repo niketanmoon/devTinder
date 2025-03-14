@@ -56,8 +56,11 @@ app.get("/user", (req, res, next)=> {
 - API: Update a user by id
 
 ## Data Sanitization and validation
+
 - Add validation on user schema
 - Add new fields to the user schema
 - Add custom validation to the schema
 - Add required, unique, trim, minLength, min, validate, default
 - Add timestamps
+- install package `validator`
+- Added validator functions for email, password and photoUrl
