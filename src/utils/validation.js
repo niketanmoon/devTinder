@@ -11,3 +11,19 @@ export const validateSignupData = (req) => {
     throw new Error("Please enter a strong password");
   }
 };
+
+export const validateProfileEditData = (req) => {
+  const allowedEditFields = [
+    "firstName",
+    "lastName",
+    "photoUrl",
+    "gender",
+    "age",
+    "skills",
+    "about",
+  ];
+  const isEditAllowed = Object.keys(req.body).every((field) =>
+    allowedEditFields.includes(field)
+  );
+  return isEditAllowed;
+};

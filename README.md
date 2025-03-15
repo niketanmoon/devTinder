@@ -94,3 +94,4 @@ app.get("/user", (req, res, next)=> {
 - userRouter
 
 - Create All the APIs
+- Create API: POST /logout, PATCH /profile/edit, PATCH /profile/password
