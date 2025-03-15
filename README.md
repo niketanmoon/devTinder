@@ -95,3 +95,10 @@ app.get("/user", (req, res, next)=> {
 
 - Create All the APIs
 - Create API: POST /logout, PATCH /profile/edit, PATCH /profile/password
+
+- Added API: connectionRequest
+- Handled dynamic status and toUserId
+- Added data sanitization and validation
+- Added compound index to make the query faster
+- Learnt about `$or` and `$and` query in mongoose
+- Add schema.pre method so that it runs before every save method
