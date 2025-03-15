@@ -102,3 +102,22 @@ app.get("/user", (req, res, next)=> {
 - Added compound index to make the query faster
 - Learnt about `$or` and `$and` query in mongoose
 - Add schema.pre method so that it runs before every save method
+
+- Create another api to accept or reject a request
+- Create GET APIs for user
+
+  - to get connections of a user
+  - to get requests
+  - to get feed of the user
+
+- Added ref and populate to get the data of fromUserId instead of looping
+- Added feed api with logic to show connections where the feed will not show already interested, ignored, accepted or rejected for fromUserId and toUserId
+- Add pagination to feed so that it only shows first 10 elements
+- Pagination:
+
+  - /feed?page=1&limit=10 => 1-10 .skip(0) & .limit(10)
+  - /feed?page=2&limit=10 => 11-20 .skip(10) & .limit(10)
+  - /feed?page=3&limit=10 => 21-30 .skip(20) & .limit(10)
+  - skip = (page-1) \* limit
+
+- Two main functions to use for pagination `skip()` and `limit()` in mongodb
