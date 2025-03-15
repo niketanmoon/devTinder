@@ -84,3 +84,13 @@ app.get("/user", (req, res, next)=> {
 - Added user auth middleware to connectionRequest API
 - Mongoose Schema methods
 - Added user schema methods for creating jwt token and validating password
+
+## Routing
+
+- Use Express router to group routing
+- authRouter
+- profileRouter
+- connectionRequestRouter
+- userRouter
+
+- Create All the APIs
