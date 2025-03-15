@@ -65,9 +65,22 @@ app.get("/user", (req, res, next)=> {
 - install package `validator`
 - Added validator functions for email, password and photoUrl
 
-
 ## Encrypting Passwords and adding extra validations
+
 - Added validations using helper function
 - install bcrypt
 - Create password hash using bcrypt hash
-- API: /login 
+- API: /login
+
+## JWT and Authentication
+
+- Add package `cookie-parser`
+- Add cookie parser middleware
+- install package `jsonwebtoken`
+- create jwt token using jwt sign
+- API: /profile which verify the jwt using token from cookies
+- Add user auth middleware
+- Add expiry to the jwt token
+- Added user auth middleware to connectionRequest API
+- Mongoose Schema methods
+- Added user schema methods for creating jwt token and validating password

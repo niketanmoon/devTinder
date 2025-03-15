@@ -5,11 +5,15 @@ import { User } from "./models/user.js";
 import { validateSignupData } from "./utils/validation.js";
 import bcrypt from "bcrypt";
 import validator from "validator";
+import cookieParser from "cookie-parser";
+import jwt from "jsonwebtoken";
+import { userAuth } from "./middlewares/auth.js";
 
 const app = express();
 
 // middleware to converting body to json
 app.use(express.json());
+app.use(cookieParser());
 
 app.post("/signup", async (req, res) => {
   try {
@@ -45,15 +49,38 @@ app.post("/login", async (req, res) => {
     if (!user) {
       throw new Error("Email or password is not correct");
     }
-    const isPasswordValid = await bcrypt.compare(password, user.password);
+    const isPasswordValid = await user.validatePassword(password);
 
     if (isPasswordValid) {
+      // Create a JWT Token
+      const token = await user.getJWT();
+      // Add the token to cookie and send the response back to the user
+      res.cookie("token", token, {
+        expires: new Date(Date.now() + 24 * 3600000),
+      });
       res.send("Login Successful!!!");
     } else {
       throw new Error("Email or password is not correct");
     }
   } catch (err) {
     res.status(400).send("ERROR: " + err.message);
+  }
+});
+
+app.get("/profile", userAuth, async (req, res) => {
+  try {
+    const user = req.user;
+    res.send(user);
+  } catch (err) {
+    res.status(400).send("Something went wrong");
+  }
+});
+
+app.post("/connectionRequest", userAuth, async (req, res) => {
+  try {
+    res.send(req.user);
+  } catch (err) {
+    res.status(400).send("Error: " + err.message);
   }
 });
 
