@@ -1,6 +1,9 @@
 import express from "express";
 import { userAuth } from "../middlewares/auth.js";
-import { validateProfileEditData } from "../utils/validation.js";
+import {
+  validatePasswordEditData,
+  validateProfileEditData,
+} from "../utils/validation.js";
 
 export const profileRouter = express.Router();
 
@@ -37,6 +40,9 @@ profileRouter.patch("/profile/edit", userAuth, async (req, res) => {
 
 profileRouter.patch("/profile/password", userAuth, async (req, res) => {
   try {
+    if (!validatePasswordEditData(req)) {
+      throw new Error("Password update data not correct");
+    }
     const { currentPassword, newPassword } = req.body;
     const loggedInUser = req.loggedInUser;
 

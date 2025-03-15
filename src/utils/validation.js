@@ -27,3 +27,11 @@ export const validateProfileEditData = (req) => {
   );
   return isEditAllowed;
 };
+
+export const validatePasswordEditData = (req) => {
+  const allowedEditFields = ["currentPassword", "newPassword"];
+  const isEditAllowed = Object.keys(req.body).every((field) =>
+    allowedEditFields.includes(field)
+  );
+  return isEditAllowed;
+};
