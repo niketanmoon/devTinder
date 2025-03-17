@@ -6,10 +6,18 @@ import { authRouter } from "./routes/auth.js";
 import { profileRouter } from "./routes/profile.js";
 import { requestRouter } from "./routes/request.js";
 import { userRouter } from "./routes/user.js";
+import cors from "cors";
 
 const app = express();
 
 // middleware to converting body to json
+app.use(
+  cors({
+    origin: "http://localhost:5173",
+    credentials: true,
+  })
+);
+
 app.use(express.json());
 app.use(cookieParser());
 

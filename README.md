@@ -121,3 +121,5 @@ app.get("/user", (req, res, next)=> {
   - skip = (page-1) \* limit
 
 - Two main functions to use for pagination `skip()` and `limit()` in mongodb
+- install cors middleware to allow cross origin apis `npm i cors`
+- Add whitelist apis
